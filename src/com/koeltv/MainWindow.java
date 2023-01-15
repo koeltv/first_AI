@@ -58,10 +58,10 @@ public class MainWindow extends JFrame implements Runnable {
 			public void keyPressed(KeyEvent e) {
 				super.keyPressed(e);
 				switch (e.getKeyCode()) {
-					case KeyEvent.VK_ADD -> {
+					case KeyEvent.VK_ADD, KeyEvent.VK_PLUS -> {
 						if(waitTime > 1) waitTime /= 2;
 					}
-					case KeyEvent.VK_SUBTRACT -> {
+					case KeyEvent.VK_SUBTRACT, KeyEvent.VK_MINUS -> {
 						if (waitTime < 10000) waitTime *= 2;
 					}
 				}
