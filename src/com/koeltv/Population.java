@@ -11,7 +11,7 @@ public class Population extends AbstractDot{
 	private int minStep = 5000;
 
 	private int generationWithoutProgress = 0;
-	private int oldMax = minStep;
+	private double oldMax = 0;
 
 	public Population(int size) {
 		dots = new Dot[size];
@@ -135,14 +135,17 @@ public class Population extends AbstractDot{
 		if (dots[bestDot].reachedGoal) {
 			minStep = dots[bestDot].brain.step;
 		} else {
-			int currentBest = dots[bestDot].brain.step;
-			if (currentBest >= oldMax) generationWithoutProgress++;
+			double currentBest = dots[bestDot].fitness;
+			if (currentBest <= oldMax) generationWithoutProgress++;
 			else oldMax = currentBest;
 		}
 		System.out.println("Generation : " + generation + " | Step : " + minStep);
 		System.out.println("Best dot fitness : " + dots[bestDot].fitness);
 
-		if (generationWithoutProgress > 3) reset();
+		if (generationWithoutProgress > 3) {
+			reset();
+			generationWithoutProgress = 0;
+		}
 
 		return bestDot;
 	}
